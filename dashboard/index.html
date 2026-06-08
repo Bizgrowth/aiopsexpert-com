@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIopsExpert.com — Operations Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #111827; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .progress-bar { transition: width 0.8s ease; }
+        .wf-node-box {
+            background: #1f2937;
+            border: 2px solid rgba(55,65,81,0.7);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            width: 9rem;
+            flex-shrink: 0;
+        }
+        .wf-node-box:hover { transform: translateY(-2px); cursor: pointer; }
+        @keyframes pulse-amber {
+            0%, 100% { box-shadow: 0 0 12px rgba(245,158,11,0.2); }
+            50% { box-shadow: 0 0 28px rgba(245,158,11,0.5); }
+        }
+        .wf-pulsing { animation: pulse-amber 1.4s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-[#111827] text-gray-100 min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-[#0d1117] border-b border-gray-800 px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div>
+                <div class="flex items-center gap-1">
+                    <span class="text-2xl font-black text-amber-400">AIops</span>
+                    <span class="text-2xl font-black text-gray-100">Expert</span>
+                    <span class="text-sm font-medium text-gray-500 ml-1">.com</span>
+                </div>
+                <p class="text-xs text-gray-600 mt-0.5 tracking-widest uppercase">AI Agents as Internal Employees</p>
+            </div>
+            <div class="text-right">
+                <div class="text-sm font-semibold text-gray-300" id="current-date"></div>
+                <div class="mt-1">
+                    <span class="bg-amber-400/10 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full border border-amber-400/30">
+                        Operations Command Center
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- TAB NAVIGATION -->
+    <nav class="bg-[#0d1117] border-b border-gray-800 px-8">
+        <div class="max-w-7xl mx-auto flex">
+            <button onclick="switchTab('ops')" id="tab-ops"
+                class="px-6 py-4 text-sm font-semibold text-amber-400 border-b-[3px] border-amber-400 transition-all">
+                🎯 Ops Command Center
+            </button>
+            <button onclick="switchTab('product')" id="tab-product"
+                class="px-6 py-4 text-sm font-semibold text-gray-400 border-b-[3px] border-transparent hover:text-gray-200 transition-all">
+                🚀 Product Vision
+            </button>
+            <button onclick="switchTab('clients')" id="tab-clients"
+                class="px-6 py-4 text-sm font-semibold text-gray-400 border-b-[3px] border-transparent hover:text-gray-200 transition-all">
+                👥 Client Reports
+            </button>
+            <button onclick="switchTab('workflow')" id="tab-workflow"
+                class="px-6 py-4 text-sm font-semibold text-gray-400 border-b-[3px] border-transparent hover:text-gray-200 transition-all">
+                ⚙️ Agent Workflow
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-8 py-8">
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- TAB 1: OPS COMMAND CENTER                       -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <div id="tab-content-ops" class="tab-content active">
+
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-gray-100">All Initiatives</h2>
+                <p class="text-sm text-gray-500 mt-1">Live status across every active project and strategy</p>
+            </div>
+
+            <!-- INITIATIVE CARDS -->
+            <div class="grid grid-cols-5 gap-4 mb-8">
+
+                <!-- Card 1: AIopsExpert Platform — GOLD -->
+                <div class="card-hover bg-[#1f2937] rounded-xl overflow-hidden border border-gray-700/50">
+                    <div class="h-1.5 bg-amber-400"></div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <span class="text-2xl">🏗️</span>
+                            <span class="bg-amber-400/10 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full border border-amber-400/20">BUILDING</span>
+                        </div>
+                        <h3 class="font-bold text-gray-100 text-sm leading-tight mb-1">AIopsExpert<br>.com Platform</h3>
+                        <p class="text-xs text-amber-400/70 font-semibold uppercase tracking-wider mb-4">Foundation</p>
+                        <div class="space-y-2 mb-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Last Action</p>
+                                <p class="text-xs text-gray-300">8 agents live, dashboard complete</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Next Action</p>
+                                <p class="text-xs text-amber-300 font-medium">Host dashboard + get first paid client</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-500">Progress</span>
+                                <span class="text-amber-400 font-semibold">45%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full bg-amber-400 rounded-full" style="width:45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: GHL Setup Agent — BLUE -->
+                <div class="card-hover bg-[#1f2937] rounded-xl overflow-hidden border border-gray-700/50">
+                    <div class="h-1.5 bg-blue-500"></div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <span class="text-2xl">🤖</span>
+                            <span class="bg-blue-500/10 text-blue-400 text-xs font-bold px-2 py-0.5 rounded-full border border-blue-500/20">PHASE 2 ✓</span>
+                        </div>
+                        <h3 class="font-bold text-gray-100 text-sm leading-tight mb-1">GHL Setup<br>Agent</h3>
+                        <p class="text-xs text-blue-400/70 font-semibold uppercase tracking-wider mb-4">Delivery Tool</p>
+                        <div class="space-y-2 mb-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Last Action</p>
+                                <p class="text-xs text-gray-300">Removed pipeline creation, fixed report</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Next Action</p>
+                                <p class="text-xs text-blue-300 font-medium">Re-run after manual pipelines built</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-500">Progress</span>
+                                <span class="text-blue-400 font-semibold">75%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full bg-blue-500 rounded-full" style="width:75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Houston Capital Lending — ORANGE -->
+                <div class="card-hover bg-[#1f2937] rounded-xl overflow-hidden border border-gray-700/50">
+                    <div class="h-1.5 bg-orange-500"></div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <span class="text-2xl">🏦</span>
+                            <span class="bg-orange-500/10 text-orange-400 text-xs font-bold px-2 py-0.5 rounded-full border border-orange-500/20">PENDING</span>
+                        </div>
+                        <h3 class="font-bold text-gray-100 text-sm leading-tight mb-1">Houston Capital<br>Lending</h3>
+                        <p class="text-xs text-orange-400/70 font-semibold uppercase tracking-wider mb-4">Client · $500</p>
+                        <div class="space-y-2 mb-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Last Action</p>
+                                <p class="text-xs text-gray-300">Upwork proposal submitted</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Next Action</p>
+                                <p class="text-xs text-orange-300 font-medium">Build 3 GHL pipelines manually</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-500">Progress</span>
+                                <span class="text-orange-400 font-semibold">30%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full bg-orange-500 rounded-full" style="width:30%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Nootens Team — GREEN -->
+                <div class="card-hover bg-[#1f2937] rounded-xl overflow-hidden border border-gray-700/50">
+                    <div class="h-1.5 bg-green-500"></div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <span class="text-2xl">🏡</span>
+                            <span class="bg-green-500/10 text-green-400 text-xs font-bold px-2 py-0.5 rounded-full border border-green-500/20">CASE STUDY</span>
+                        </div>
+                        <h3 class="font-bold text-gray-100 text-sm leading-tight mb-1">Nootens<br>Team</h3>
+                        <p class="text-xs text-green-400/70 font-semibold uppercase tracking-wider mb-4">Portfolio · Houston TX</p>
+                        <div class="space-y-2 mb-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Last Action</p>
+                                <p class="text-xs text-gray-300">Client config created in agent</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Next Action</p>
+                                <p class="text-xs text-green-300 font-medium">Set up Nootens GHL credentials</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-500">Progress</span>
+                                <span class="text-green-400 font-semibold">40%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full bg-green-500 rounded-full" style="width:40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Upwork Strategy — PURPLE -->
+                <div class="card-hover bg-[#1f2937] rounded-xl overflow-hidden border border-gray-700/50">
+                    <div class="h-1.5 bg-purple-500"></div>
+                    <div class="p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <span class="text-2xl">💼</span>
+                            <span class="bg-purple-500/10 text-purple-400 text-xs font-bold px-2 py-0.5 rounded-full border border-purple-500/20">ACTIVE</span>
+                        </div>
+                        <h3 class="font-bold text-gray-100 text-sm leading-tight mb-1">Upwork<br>Strategy</h3>
+                        <p class="text-xs text-purple-400/70 font-semibold uppercase tracking-wider mb-4">Revenue Engine</p>
+                        <div class="space-y-2 mb-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Last Action</p>
+                                <p class="text-xs text-gray-300">Houston proposal submitted</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Next Action</p>
+                                <p class="text-xs text-purple-300 font-medium">Submit 5 more proposals</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-500">Progress</span>
+                                <span class="text-purple-400 font-semibold">25%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full bg-purple-500 rounded-full" style="width:25%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end initiative cards -->
+
+            <!-- BOTTOM ROW: SOP Compliance + Next Actions -->
+            <div class="grid grid-cols-3 gap-6">
+
+                <!-- SOP Compliance — 2/3 width -->
+                <div class="col-span-2 bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-lg">📋</span>
+                        <h3 class="font-bold text-gray-100">SOP Compliance</h3>
+                        <span class="ml-auto text-xs text-gray-500">AIopsExpert.com Standard Operating Procedures</span>
+                    </div>
+                    <table class="w-full text-xs">
+                        <thead>
+                            <tr class="text-gray-500 uppercase tracking-wider">
+                                <th class="text-left pb-3 pr-6 font-medium">Initiative</th>
+                                <th class="text-center pb-3 px-3 font-medium">Git Init</th>
+                                <th class="text-center pb-3 px-3 font-medium">Idempotent</th>
+                                <th class="text-center pb-3 px-3 font-medium">Subagent</th>
+                                <th class="text-center pb-3 px-3 font-medium">Cred Isolation</th>
+                                <th class="text-center pb-3 px-3 font-medium">Logging</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700/40">
+                            <tr>
+                                <td class="py-3 pr-6 text-gray-300">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-amber-400 mr-2 align-middle"></span>AIopsExpert Platform
+                                </td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3 text-gray-500">🔄</td>
+                                <td class="text-center py-3 text-gray-500">🔄</td>
+                                <td class="text-center py-3 text-gray-500">🔄</td>
+                                <td class="text-center py-3 text-gray-500">🔄</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 pr-6 text-gray-300">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-blue-500 mr-2 align-middle"></span>GHL Setup Agent
+                                </td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">⚠️</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 pr-6 text-gray-300">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-orange-500 mr-2 align-middle"></span>Houston Capital Lending
+                                </td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">⚠️</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 pr-6 text-gray-300">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2 align-middle"></span>Nootens Team
+                                </td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">✅</td>
+                                <td class="text-center py-3">⚠️</td>
+                                <td class="text-center py-3">⚠️</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 pr-6 text-gray-300">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-2 align-middle"></span>Upwork Strategy
+                                </td>
+                                <td class="text-center py-3 text-gray-600">—</td>
+                                <td class="text-center py-3 text-gray-600">—</td>
+                                <td class="text-center py-3 text-gray-600">—</td>
+                                <td class="text-center py-3 text-gray-600">—</td>
+                                <td class="text-center py-3 text-gray-600">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="flex gap-6 mt-4 pt-3 border-t border-gray-700/40 text-xs text-gray-500">
+                        <span>✅ Complete</span>
+                        <span>⚠️ Partial</span>
+                        <span>🔄 In Progress</span>
+                        <span>— N/A</span>
+                    </div>
+                </div>
+
+                <!-- Next Actions — 1/3 width -->
+                <div class="bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-lg">⚡</span>
+                        <h3 class="font-bold text-gray-100">Next Actions</h3>
+                    </div>
+                    <div class="space-y-3">
+
+                        <div class="flex gap-3 items-start">
+                            <div class="w-1 h-10 rounded-full bg-orange-500 flex-shrink-0 mt-0.5"></div>
+                            <div>
+                                <p class="text-xs font-bold text-orange-400 uppercase tracking-wide">Houston · Urgent</p>
+                                <p class="text-xs text-gray-300 mt-0.5 leading-relaxed">Build 3 GHL pipelines manually in dashboard</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 items-start">
+                            <div class="w-1 h-10 rounded-full bg-purple-500 flex-shrink-0 mt-0.5"></div>
+                            <div>
+                                <p class="text-xs font-bold text-purple-400 uppercase tracking-wide">Upwork · This Week</p>
+                                <p class="text-xs text-gray-300 mt-0.5 leading-relaxed">Follow up on Houston + 5 new proposals</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 items-start">
+                            <div class="w-1 h-10 rounded-full bg-blue-500 flex-shrink-0 mt-0.5"></div>
+                            <div>
+                                <p class="text-xs font-bold text-blue-400 uppercase tracking-wide">GHL Agent · After Pipelines</p>
+                                <p class="text-xs text-gray-300 mt-0.5 leading-relaxed">Re-run agent for full end-to-end verify</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 items-start">
+                            <div class="w-1 h-10 rounded-full bg-green-500 flex-shrink-0 mt-0.5"></div>
+                            <div>
+                                <p class="text-xs font-bold text-green-400 uppercase tracking-wide">Nootens · Soon</p>
+                                <p class="text-xs text-gray-300 mt-0.5 leading-relaxed">Add GHL credentials + run agent</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 items-start">
+                            <div class="w-1 h-10 rounded-full bg-amber-400 flex-shrink-0 mt-0.5"></div>
+                            <div>
+                                <p class="text-xs font-bold text-amber-400 uppercase tracking-wide">AIopsExpert · Next</p>
+                                <p class="text-xs text-gray-300 mt-0.5 leading-relaxed">Host dashboard on Netlify + GitHub</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div><!-- end bottom row -->
+
+        </div><!-- end tab-content-ops -->
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- TAB 2: PRODUCT VISION                           -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <div id="tab-content-product" class="tab-content">
+
+            <!-- HERO BANNER -->
+            <div class="relative bg-gradient-to-r from-[#0d1117] via-[#1a1f2e] to-[#0d1117] rounded-2xl border border-amber-400/20 p-10 mb-8 overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-amber-400/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div class="relative z-10">
+                    <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 rounded-full px-4 py-1.5 mb-4">
+                        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                        <span class="text-xs text-amber-400 font-semibold uppercase tracking-widest">AIopsExpert.com — The Vision</span>
+                    </div>
+                    <h1 class="text-4xl font-black text-gray-100 leading-tight mb-3">
+                        Replace Headcount<br>
+                        <span class="text-amber-400">With AI Agents</span>
+                    </h1>
+                    <p class="text-lg text-gray-400 max-w-2xl leading-relaxed">
+                        Every function a small business outsources to a contractor or VA can be replaced with a purpose-built AI agent — faster, cheaper, and available 24/7.
+                    </p>
+                </div>
+            </div>
+
+            <!-- AGENT-AS-EMPLOYEE MODEL -->
+            <div class="mb-8">
+                <div class="flex items-center gap-3 mb-2">
+                    <h2 class="text-lg font-bold text-gray-100">Agent-as-Employee Model</h2>
+                    <span class="text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full font-semibold">8 Agents Live ✓</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-5">AI-Ops-Expert delivery pipeline (7 skill agents) + GHL Setup Agent — all operational in Claude Code</p>
+
+                <!-- AI-Ops-Expert Delivery Engine: 7 agents -->
+                <div class="mb-3">
+                    <p class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-3">AI-Ops-Expert Delivery Engine — <code class="text-gray-400 font-normal normal-case">.claude/skills/</code></p>
+                    <div class="grid grid-cols-4 gap-3">
+                        <div class="card-hover bg-[#1f2937] rounded-xl border border-amber-400/30 p-4">
+                            <div class="h-1 bg-amber-400 rounded mb-3"></div>
+                            <div class="text-2xl mb-1">🔍</div>
+                            <h3 class="font-bold text-gray-100 text-sm mb-0.5">Intake Agent</h3>
+                            <p class="text-xs text-amber-400/80 mb-2">Client discovery &amp; proposal</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-3">Qualifies leads, runs AI readiness assessment, scopes the engagement</p>
+                            <span class="bg-amber-400/10 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full border border-amber-400/20">LIVE ✓</span>
+                        </div>
+                        <div class="card-hover bg-[#1f2937] rounded-xl border border-amber-400/30 p-4">
+                            <div class="h-1 bg-amber-400 rounded mb-3"></div>
+                            <div class="text-2xl mb-1">🏗️</div>
+                            <h3 class="font-bold text-gray-100 text-sm mb-0.5">Architect Agent</h3>
+                            <p class="text-xs text-amber-400/80 mb-2">PRD &amp; tech stack design</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-3">Produces PRD, MVP scope, tech stack selection, implementation plan</p>
+                            <span class="bg-amber-400/10 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full border border-amber-400/20">LIVE ✓</span>
+                        </div>
+                        <div class="card-hover bg-[#1f2937] rounded-xl border border-amber-400/30 p-4">
+                            <div class="h-1 bg-amber-400 rounded mb-3"></div>
+                            <div class="text-2xl mb-1">💻</div>
+                            <h3 class="font-bold text-gray-100 text-sm mb-0.5">Builder Agent</h3>
+                            <p class="text-xs text-amber-400/80 mb-2">Code &amp; app development</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-3">Builds web apps, dashboards, Claude API integrations, frontend/backend</p>
+                            <span class="bg-amber-400/10 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full border border-amber-400/20">LIVE ✓</span>
+                        </div>
+                        <div class="card-hover bg-[#1f2937] rounded-xl border border-amber-400/30 p-4">
+                            <div class="h-1 bg-amber-400 rounded mb-3"></div>
+                            <div class="text-2xl mb-1">⚡</div>
+                            <h3 class="font-bold text-gray-100 text-sm mb-0.5">Automator Agent</h3>
+                            <p class="text-xs text-amber-400/80 mb-2">Make.com, n8n, Zapier</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-3">Designs and builds automation workflows for any business process</p>
+                            <span class="bg-amber-400/10 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full border border-amber-400/20">LIVE ✓</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-3 mt-3">
+                        <div class="card-hover bg-[#1f2937] rounded-xl border border-amber-400/30 p-4">
+                            <div class="h-1 bg-amber-400 rounded mb-3"></div>
+                            <div class="text-2xl mb-1">🔗</div>
+                            <h3 class="font-bold text-gray-100 text-sm mb-0.5">Integrator Agent</h3>
+                            <p class="text-xs text-amber-400/80 mb-2">APIs, CRMs &amp; webhooks</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-3">Connects HubSpot, Salesforce, GHL, webhooks, and data pipelines</p>
+                            <span class="bg-amber-400/10 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full border border-amber-400/20">LIVE ✓</span>
+                        </div>
+                        <div class="card-hover bg-[#1f2937] rounded-xl border border-amber-400/30 p-4">
+                            <div class="h-1 bg-amber-400 rounded mb-3"></div>
+                            <div class="text-2xl mb-1">🔎</div>
+                            <h3 class="font-bold text-gray-100 text-sm mb-0.5">Reviewer Agent</h3>
+                            <p class="text-xs text-amber-400/80 mb-2">QA &amp; launch gate</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-3">Code audit, launch checklist, client readiness — final delivery gate</p>
+                            <span class="bg-amber-400/10 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full border border-amber-400/20">LIVE ✓</span>
+                        </div>
+                        <div class="card-hover bg-[#1f2937] rounded-xl border border-amber-400/30 p-4">
+                            <div class="h-1 bg-amber-400 rounded mb-3"></div>
+                            <div class="text-2xl mb-1">📄</div>
+                            <h3 class="font-bold text-gray-100 text-sm mb-0.5">Documenter Agent</h3>
+                            <p class="text-xs text-amber-400/80 mb-2">SOPs &amp; client handoff</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-3">Produces SOPs, training guides, maintenance runbooks for clients</p>
+                            <span class="bg-amber-400/10 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full border border-amber-400/20">LIVE ✓</span>
+                        </div>
+                        <!-- GHL Setup Agent — separate repo -->
+                        <div class="card-hover bg-[#1f2937] rounded-xl border border-blue-500/30 p-4">
+                            <div class="h-1 bg-blue-500 rounded mb-3"></div>
+                            <div class="text-2xl mb-1">🤖</div>
+                            <h3 class="font-bold text-gray-100 text-sm mb-0.5">GHL Setup Agent</h3>
+                            <p class="text-xs text-blue-400/80 mb-2">GHL CRM deployment</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-3">Configures GHL pipelines, fields, contacts &amp; opportunities via API</p>
+                            <span class="bg-blue-500/10 text-blue-400 text-xs font-bold px-2 py-0.5 rounded-full border border-blue-500/20">LIVE ✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICE OFFERINGS + TECH STACK -->
+            <div class="grid grid-cols-3 gap-6 mb-8">
+                <div class="col-span-2 bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-lg">💼</span>
+                        <h3 class="font-bold text-gray-100">Service Offerings</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-[#111827] rounded-lg p-4 border border-orange-500/20">
+                            <p class="text-xs text-orange-400 font-bold uppercase tracking-wider mb-1">Quick Win — $500</p>
+                            <p class="text-sm font-semibold text-gray-100 mb-1">GHL CRM Setup</p>
+                            <p class="text-xs text-gray-400">Full GHL account setup: pipelines, custom fields, contacts, opportunities, and setup report delivered in 48 hours.</p>
+                        </div>
+                        <div class="bg-[#111827] rounded-lg p-4 border border-amber-400/20">
+                            <p class="text-xs text-amber-400 font-bold uppercase tracking-wider mb-1">Retainer — $2k/mo</p>
+                            <p class="text-sm font-semibold text-gray-100 mb-1">CRM Management</p>
+                            <p class="text-xs text-gray-400">Monthly agent runs, field updates, pipeline maintenance, and reporting. Zero manual effort from the client.</p>
+                        </div>
+                        <div class="bg-[#111827] rounded-lg p-4 border border-blue-500/20">
+                            <p class="text-xs text-blue-400 font-bold uppercase tracking-wider mb-1">Project — $1–5k</p>
+                            <p class="text-sm font-semibold text-gray-100 mb-1">Custom Agent Build</p>
+                            <p class="text-xs text-gray-400">Custom AI agent scoped to a specific workflow: lead follow-up, onboarding, scoring, or reporting.</p>
+                        </div>
+                        <div class="bg-[#111827] rounded-lg p-4 border border-green-500/20">
+                            <p class="text-xs text-green-400 font-bold uppercase tracking-wider mb-1">Ongoing — $500/mo</p>
+                            <p class="text-sm font-semibold text-gray-100 mb-1">Workflow Automation</p>
+                            <p class="text-xs text-gray-400">Make.com + GHL automation flows. Trigger-based sequences, integrations, and maintenance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-lg">⚙️</span>
+                        <h3 class="font-bold text-gray-100">Tech Stack</h3>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                            <span class="text-xl">🧠</span>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-200">Claude API</p>
+                                <p class="text-xs text-gray-500">Agentic reasoning engine</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                            <span class="text-xl">🔗</span>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-200">GHL v2 API</p>
+                                <p class="text-xs text-gray-500">CRM operations layer</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                            <span class="text-xl">🐍</span>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-200">Python 3.11</p>
+                                <p class="text-xs text-gray-500">Agent runtime + CLI</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                            <span class="text-xl">⚡</span>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-200">Make.com</p>
+                                <p class="text-xs text-gray-500">Automation workflows</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                            <span class="text-xl">💼</span>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-200">Upwork</p>
+                                <p class="text-xs text-gray-500">Client acquisition channel</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUILD ROADMAP -->
+            <div class="bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                <div class="flex items-center gap-2 mb-5">
+                    <span class="text-lg">🗺️</span>
+                    <h3 class="font-bold text-gray-100">Build Roadmap</h3>
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-blue-500 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center">1</span>
+                            <span class="text-blue-400 text-xs font-bold uppercase tracking-wide">Complete ✓</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-gray-100 mb-2">GHL Setup Agent</h4>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>✓ Phase 1 &amp; 2 built</li>
+                            <li>✓ Idempotent runs</li>
+                            <li>✓ Per-client configs</li>
+                            <li>✓ Pipeline audit report</li>
+                        </ul>
+                    </div>
+                    <div class="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-orange-500 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center">2</span>
+                            <span class="text-orange-400 text-xs font-bold uppercase tracking-wide">In Progress</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-gray-100 mb-2">Case Studies + Revenue</h4>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>🔄 Houston GHL setup</li>
+                            <li>🔄 Nootens deployment</li>
+                            <li>🔄 Upwork proposals</li>
+                            <li>⬜ First paid client win</li>
+                        </ul>
+                    </div>
+                    <div class="opacity-60">
+                        <div class="bg-gray-700/20 border border-gray-700/30 rounded-lg p-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-gray-600 text-gray-300 text-xs font-black w-6 h-6 rounded-full flex items-center justify-center">3</span>
+                                <span class="text-gray-500 text-xs font-bold uppercase tracking-wide">Planned</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-gray-300 mb-2">Productize &amp; Scale</h4>
+                            <ul class="text-xs text-gray-500 space-y-1">
+                                <li>⬜ Structured logging</li>
+                                <li>⬜ Multi-client runs</li>
+                                <li>⬜ Follow-up agent</li>
+                                <li>⬜ Retainer package</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="opacity-40">
+                        <div class="bg-gray-700/20 border border-gray-700/30 rounded-lg p-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-gray-700 text-gray-400 text-xs font-black w-6 h-6 rounded-full flex items-center justify-center">4</span>
+                                <span class="text-gray-600 text-xs font-bold uppercase tracking-wide">Future</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-gray-400 mb-2">AIopsExpert.com Launch</h4>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>⬜ Landing page</li>
+                                <li>⬜ Agent marketplace</li>
+                                <li>⬜ Self-serve onboarding</li>
+                                <li>⬜ Recurring revenue</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end tab-content-product -->
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- TAB 3: CLIENT REPORTS                           -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <div id="tab-content-clients" class="tab-content">
+
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-gray-100">Client Reports</h2>
+                <p class="text-sm text-gray-500 mt-1">Full case study summaries for active and pipeline clients</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+
+                <!-- HOUSTON CAPITAL LENDING -->
+                <div class="space-y-4">
+                    <div class="bg-[#1f2937] rounded-xl border border-orange-500/30 overflow-hidden">
+                        <div class="h-1.5 bg-orange-500"></div>
+                        <div class="p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Houston Capital Lending</h3>
+                                    <p class="text-xs text-orange-400 font-semibold uppercase tracking-wide mt-0.5">Private Lending / Hard Money — Houston, TX</p>
+                                </div>
+                                <span class="bg-orange-500/10 text-orange-400 text-xs font-bold px-3 py-1 rounded-full border border-orange-500/20">IN PROGRESS</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="bg-[#111827] rounded-lg p-3 text-center">
+                                    <p class="text-lg font-black text-orange-400">$500</p>
+                                    <p class="text-xs text-gray-500">Contract Value</p>
+                                </div>
+                                <div class="bg-[#111827] rounded-lg p-3 text-center">
+                                    <p class="text-lg font-black text-gray-100">GHL</p>
+                                    <p class="text-xs text-gray-500">CRM Platform</p>
+                                </div>
+                                <div class="bg-[#111827] rounded-lg p-3 text-center">
+                                    <p class="text-lg font-black text-gray-100">48h</p>
+                                    <p class="text-xs text-gray-500">Target Delivery</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                        <h4 class="text-sm font-bold text-gray-100 mb-3">Deliverables</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3">
+                                <span class="text-green-400 mt-0.5">✅</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">GHL Connection Verified</p>
+                                    <p class="text-xs text-gray-500">API auth confirmed, location ID active</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-green-400 mt-0.5">✅</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">8 Custom Fields Created</p>
+                                    <p class="text-xs text-gray-500">Loan Type, ARV, LTV Ratio, Exit Strategy + 4 more</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-green-400 mt-0.5">✅</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">Test Contact &amp; Opportunity Created</p>
+                                    <p class="text-xs text-gray-500">Verified data entry path through GHL</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-green-400 mt-0.5">✅</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">Setup Report Delivered</p>
+                                    <p class="text-xs text-gray-500">Full audit log with pipeline manual setup specs</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-orange-400 mt-0.5">⚠️</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">3 Pipelines — Manual Setup Required</p>
+                                    <p class="text-xs text-gray-500">Fix &amp; Flip, DSCR, Bridge Loan (GHL v2 API limitation)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                        <h4 class="text-sm font-bold text-gray-100 mb-3">Pipeline Specs — Pending Manual Build</h4>
+                        <div class="space-y-3 text-xs">
+                            <div>
+                                <p class="font-semibold text-orange-300 mb-1">Fix &amp; Flip Pipeline (6 stages)</p>
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">New Inquiry</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Pre-Qualification</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Term Sheet Sent</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Due Diligence</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Closing</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Funded / Declined</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-orange-300 mb-1">DSCR Pipeline (6 stages)</p>
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Lead Received</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">DSCR Analysis</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Appraisal Ordered</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Underwriting</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Clear to Close</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Funded / Declined</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-orange-300 mb-1">Bridge Loan Pipeline (5 stages)</p>
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Initial Inquiry</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Term Sheet Issued</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Property Review</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Closing Scheduled</span>
+                                    <span class="text-gray-600">→</span>
+                                    <span class="bg-[#111827] px-2 py-0.5 rounded text-gray-400">Funded / Cancelled</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1f2937] rounded-xl border border-orange-500/20 p-5">
+                        <h4 class="text-sm font-bold text-gray-100 mb-3">Next Phase</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2">
+                                <span class="text-orange-400 font-bold text-xs mt-0.5">1.</span>
+                                <p class="text-xs text-gray-300">Client manually creates 3 pipelines in GHL UI using specs above</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-orange-400 font-bold text-xs mt-0.5">2.</span>
+                                <p class="text-xs text-gray-300">Re-run <code class="bg-[#111827] px-1 rounded text-orange-300">python agent.py --client houston</code> to verify end-to-end</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-orange-400 font-bold text-xs mt-0.5">3.</span>
+                                <p class="text-xs text-gray-300">Deliver final setup report to client and collect payment</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-orange-400 font-bold text-xs mt-0.5">4.</span>
+                                <p class="text-xs text-gray-300">Pitch ongoing CRM management retainer ($2k/mo)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOOTENS TEAM -->
+                <div class="space-y-4">
+                    <div class="bg-[#1f2937] rounded-xl border border-green-500/30 overflow-hidden">
+                        <div class="h-1.5 bg-green-500"></div>
+                        <div class="p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Nootens Team</h3>
+                                    <p class="text-xs text-green-400 font-semibold uppercase tracking-wide mt-0.5">Real Estate / Mortgage / Construction — Houston, TX</p>
+                                </div>
+                                <span class="bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-full border border-green-500/20">CASE STUDY</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="bg-[#111827] rounded-lg p-3 text-center">
+                                    <p class="text-lg font-black text-green-400">4</p>
+                                    <p class="text-xs text-gray-500">Pipelines Mapped</p>
+                                </div>
+                                <div class="bg-[#111827] rounded-lg p-3 text-center">
+                                    <p class="text-lg font-black text-gray-100">8</p>
+                                    <p class="text-xs text-gray-500">Custom Fields</p>
+                                </div>
+                                <div class="bg-[#111827] rounded-lg p-3 text-center">
+                                    <p class="text-lg font-black text-gray-100">3</p>
+                                    <p class="text-xs text-gray-500">Business Lines</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                        <h4 class="text-sm font-bold text-gray-100 mb-3">Work Completed</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3">
+                                <span class="text-green-400 mt-0.5">✅</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">Business Analysis Completed</p>
+                                    <p class="text-xs text-gray-500">3 service lines: agency, mortgage, construction</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-green-400 mt-0.5">✅</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">4 Pipeline Designs Documented</p>
+                                    <p class="text-xs text-gray-500">Buyer, Seller, Mortgage, New Construction with stage specs</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-green-400 mt-0.5">✅</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">8 Custom Fields Mapped</p>
+                                    <p class="text-xs text-gray-500">Client Type, Property Type, Budget, Timeline + 4 more</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-green-400 mt-0.5">✅</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200">Agent Config Created</p>
+                                    <p class="text-xs text-gray-500">nootens.json ready in GHL Setup Agent</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 mt-0.5">⬜</span>
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-400">GHL Deployment — Pending</p>
+                                    <p class="text-xs text-gray-600">Waiting on GHL credentials for Nootens account</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1f2937] rounded-xl border border-gray-700/50 p-5">
+                        <h4 class="text-sm font-bold text-gray-100 mb-3">Pipeline Architecture</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                                <span class="text-xl">🏠</span>
+                                <div class="flex-1">
+                                    <p class="text-xs font-semibold text-gray-200">Buyer Pipeline — 6 stages</p>
+                                    <p class="text-xs text-gray-500">New Inquiry → Pre-Approved → Under Contract → Closed</p>
+                                </div>
+                                <span class="text-green-400 text-xs font-bold">MAPPED</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                                <span class="text-xl">🏷️</span>
+                                <div class="flex-1">
+                                    <p class="text-xs font-semibold text-gray-200">Seller Pipeline — 6 stages</p>
+                                    <p class="text-xs text-gray-500">Listing Inquiry → Agreement Signed → Active → Closed</p>
+                                </div>
+                                <span class="text-green-400 text-xs font-bold">MAPPED</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                                <span class="text-xl">🏦</span>
+                                <div class="flex-1">
+                                    <p class="text-xs font-semibond text-gray-200">Mortgage Pipeline — 6 stages</p>
+                                    <p class="text-xs text-gray-500">Application → Document Collection → Underwriting → Funded</p>
+                                </div>
+                                <span class="text-green-400 text-xs font-bold">MAPPED</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-[#111827] rounded-lg p-3">
+                                <span class="text-xl">🏗️</span>
+                                <div class="flex-1">
+                                    <p class="text-xs font-semibold text-gray-200">New Construction Pipeline — 6 stages</p>
+                                    <p class="text-xs text-gray-500">Site Visit → Contract Signed → Construction → Closed</p>
+                                </div>
+                                <span class="text-green-400 text-xs font-bold">MAPPED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1f2937] rounded-xl border border-green-500/20 p-5">
+                        <h4 class="text-sm font-bold text-gray-100 mb-3">Case Study Value</h4>
+                        <p class="text-xs text-gray-400 mb-3 leading-relaxed">
+                            Nootens Team is a multi-line real estate operator — the most complex GHL setup possible. Completing this proves the agent handles multi-pipeline real estate clients end-to-end.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2">
+                                <span class="text-green-400 font-bold text-xs mt-0.5">→</span>
+                                <p class="text-xs text-gray-300">Portfolio proof for Upwork proposals targeting real estate clients</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-green-400 font-bold text-xs mt-0.5">→</span>
+                                <p class="text-xs text-gray-300">Demonstrates multi-pipeline, multi-business-line agent capability</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-green-400 font-bold text-xs mt-0.5">→</span>
+                                <p class="text-xs text-gray-300">Referral opportunity: Nootens → other Houston TX real estate teams</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- end tab-content-clients -->
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- TAB 4: AGENT WORKFLOW SIMULATOR                 -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <div id="tab-content-workflow" class="tab-content">
+
+            <!-- Header + Controls -->
+            <div class="flex items-start justify-between mb-5">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-100">Agent Workflow Simulator</h2>
+                    <p class="text-sm text-gray-500 mt-1">8 agents collaborate end-to-end — from first client contact to final handoff. Click any agent to explore it.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="resetSim()" class="px-4 py-2 text-xs font-semibold text-gray-400 bg-[#1f2937] border border-gray-700 rounded-lg hover:border-gray-500 transition-all">↺ Reset</button>
+                    <button id="run-btn" onclick="runSim()" class="px-5 py-2 text-xs font-bold text-black bg-amber-400 rounded-lg hover:bg-amber-300 transition-all">▶ Run Engagement</button>
+                </div>
+            </div>
+
+            <!-- Status bar -->
+            <div class="bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-3 mb-6 flex items-center gap-3">
+                <div id="sim-dot" class="w-2.5 h-2.5 rounded-full bg-gray-700 flex-shrink-0 transition-colors duration-300"></div>
+                <p id="sim-msg" class="text-xs text-gray-500 transition-all duration-300">Ready — click Run Engagement to simulate a full client delivery</p>
+            </div>
+
+            <!-- PIPELINE DIAGRAM -->
+            <div class="bg-[#0d1117] rounded-2xl border border-gray-800 p-6 mb-5">
+
+                <!-- Phase 1: Discovery -->
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-black text-gray-600 uppercase tracking-widest">Phase 1</span>
+                    <span class="text-xs text-gray-700">— Discovery</span>
+                </div>
+                <div class="flex items-center gap-3 mb-5">
+                    <div id="node-intake" onclick="selectAgent('intake')" class="wf-node-box">
+                        <div class="text-3xl mb-1">🔍</div>
+                        <div class="text-sm font-bold text-gray-200">Intake</div>
+                        <div class="text-xs text-gray-600 mb-2">Agent</div>
+                        <div class="wf-badge text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-700/40 text-gray-500">READY</div>
+                    </div>
+                    <div class="flex items-center gap-0.5 flex-shrink-0">
+                        <div id="conn-1" class="h-px w-12 bg-gray-700 transition-colors duration-500"></div>
+                        <span class="text-gray-600 text-lg">›</span>
+                    </div>
+                    <div id="node-architect" onclick="selectAgent('architect')" class="wf-node-box">
+                        <div class="text-3xl mb-1">🏗️</div>
+                        <div class="text-sm font-bold text-gray-200">Architect</div>
+                        <div class="text-xs text-gray-600 mb-2">Agent</div>
+                        <div class="wf-badge text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-700/40 text-gray-500">READY</div>
+                    </div>
+                    <div class="flex-1"></div>
+                    <div class="bg-[#1f2937] rounded-lg border border-gray-700/40 px-4 py-2.5 w-72 flex-shrink-0">
+                        <p class="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-0.5">Phase 1 Output</p>
+                        <p class="text-xs text-gray-400 leading-relaxed">Engagement scoped · Proposal drafted · PRD written · Tech stack selected · Implementation plan ready</p>
+                    </div>
+                </div>
+
+                <!-- Down connector p1→p2 -->
+                <div class="flex items-center gap-2 ml-14 mb-3">
+                    <div class="flex flex-col items-center">
+                        <div id="conn-down-1" class="w-px h-5 bg-gray-700 transition-colors duration-500"></div>
+                        <span class="text-gray-700 text-xs leading-none">↓</span>
+                    </div>
+                    <span class="text-xs text-gray-700 ml-1">parallel build begins</span>
+                </div>
+
+                <!-- Phase 2: Parallel Build -->
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-black text-gray-600 uppercase tracking-widest">Phase 2</span>
+                    <span class="text-xs text-gray-700">— Build</span>
+                    <span class="text-xs text-gray-800 bg-gray-800 px-2 py-0.5 rounded-full">runs in parallel</span>
+                </div>
+                <div class="flex items-start gap-3 mb-5">
+                    <div id="parallel-frame" class="flex gap-3 border-2 border-dashed border-gray-800 rounded-xl p-3 transition-all duration-500">
+                        <div id="node-builder" onclick="selectAgent('builder')" class="wf-node-box">
+                            <div class="text-3xl mb-1">💻</div>
+                            <div class="text-sm font-bold text-gray-200">Builder</div>
+                            <div class="text-xs text-gray-600 mb-2">Agent</div>
+                            <div class="wf-badge text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-700/40 text-gray-500">READY</div>
+                        </div>
+                        <div id="node-automator" onclick="selectAgent('automator')" class="wf-node-box">
+                            <div class="text-3xl mb-1">⚡</div>
+                            <div class="text-sm font-bold text-gray-200">Automator</div>
+                            <div class="text-xs text-gray-600 mb-2">Agent</div>
+                            <div class="wf-badge text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-700/40 text-gray-500">READY</div>
+                        </div>
+                        <div id="node-integrator" onclick="selectAgent('integrator')" class="wf-node-box">
+                            <div class="text-3xl mb-1">🔗</div>
+                            <div class="text-sm font-bold text-gray-200">Integrator</div>
+                            <div class="text-xs text-gray-600 mb-2">Agent</div>
+                            <div class="wf-badge text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-700/40 text-gray-500">READY</div>
+                        </div>
+                    </div>
+                    <div class="flex-1"></div>
+                    <div class="self-center bg-[#1f2937] rounded-lg border border-gray-700/40 px-4 py-2.5 w-72 flex-shrink-0">
+                        <p class="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-0.5">Phase 2 Output</p>
+                        <p class="text-xs text-gray-400 leading-relaxed">Working code built · Automation workflows designed · All APIs and integrations connected</p>
+                    </div>
+                </div>
+
+                <!-- Down connector p2→p3 -->
+                <div class="flex items-center gap-2 ml-14 mb-3">
+                    <div class="flex flex-col items-center">
+                        <div id="conn-down-2" class="w-px h-5 bg-gray-700 transition-colors duration-500"></div>
+                        <span class="text-gray-700 text-xs leading-none">↓</span>
+                    </div>
+                    <span class="text-xs text-gray-700 ml-1">delivery phase begins</span>
+                </div>
+
+                <!-- Phase 3: Delivery -->
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-black text-gray-600 uppercase tracking-widest">Phase 3</span>
+                    <span class="text-xs text-gray-700">— Delivery</span>
+                </div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div id="node-reviewer" onclick="selectAgent('reviewer')" class="wf-node-box">
+                        <div class="text-3xl mb-1">🔎</div>
+                        <div class="text-sm font-bold text-gray-200">Reviewer</div>
+                        <div class="text-xs text-gray-600 mb-2">Agent</div>
+                        <div class="wf-badge text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-700/40 text-gray-500">READY</div>
+                    </div>
+                    <div class="flex items-center gap-0.5 flex-shrink-0">
+                        <div id="conn-2" class="h-px w-12 bg-gray-700 transition-colors duration-500"></div>
+                        <span class="text-gray-600 text-lg">›</span>
+                    </div>
+                    <div id="node-documenter" onclick="selectAgent('documenter')" class="wf-node-box">
+                        <div class="text-3xl mb-1">📄</div>
+                        <div class="text-sm font-bold text-gray-200">Documenter</div>
+                        <div class="text-xs text-gray-600 mb-2">Agent</div>
+                        <div class="wf-badge text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-700/40 text-gray-500">READY</div>
+                    </div>
+                    <div class="flex items-center gap-0.5 flex-shrink-0">
+                        <div id="conn-3" class="h-px w-12 bg-gray-700 transition-colors duration-500"></div>
+                        <span class="text-gray-600 text-lg">›</span>
+                    </div>
+                    <div id="node-delivered" class="wf-node-box border-dashed opacity-40 transition-all duration-500" style="cursor:default;">
+                        <div class="text-3xl mb-1">✅</div>
+                        <div class="text-sm font-bold text-gray-400">Delivered</div>
+                        <div class="text-xs text-gray-600 mb-2">to Client</div>
+                        <div class="text-xs font-semibold text-gray-600">PENDING</div>
+                    </div>
+                    <div class="flex-1"></div>
+                    <div class="bg-[#1f2937] rounded-lg border border-gray-700/40 px-4 py-2.5 w-72 flex-shrink-0">
+                        <p class="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-0.5">Phase 3 Output</p>
+                        <p class="text-xs text-gray-400 leading-relaxed">QA audit cleared · SOPs written · Client System Launch Package ready to ship</p>
+                    </div>
+                </div>
+
+                <!-- GHL Setup Agent — standalone -->
+                <div class="border-t border-gray-800/80 pt-5">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-black text-gray-600 uppercase tracking-widest">Standalone Tool</span>
+                        <span class="text-xs text-gray-700">— used by Integrator Agent for GHL deployments</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div id="node-ghl" onclick="selectAgent('ghl')" class="wf-node-box" style="border-color: rgba(59,130,246,0.35);">
+                            <div class="text-3xl mb-1">🤖</div>
+                            <div class="text-sm font-bold text-gray-200">GHL Setup</div>
+                            <div class="text-xs text-blue-400 mb-2">Agent</div>
+                            <div class="text-xs font-semibold text-blue-400">LIVE ✓</div>
+                        </div>
+                        <div class="bg-[#1f2937] rounded-lg border border-blue-500/20 px-4 py-3 max-w-lg">
+                            <p class="text-xs text-blue-400 font-semibold uppercase tracking-wider mb-1">Python CLI · GHL-Agent/agent.py</p>
+                            <p class="text-xs text-gray-400 leading-relaxed">Configures GoHighLevel CRM from a per-client JSON config. Idempotent — re-run safely at any time. Run via: <code class="bg-[#0d1117] px-1.5 py-0.5 rounded text-orange-300">python agent.py --client houston</code></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end pipeline diagram -->
+
+            <!-- AGENT DETAIL PANEL -->
+            <div id="detail-panel" class="hidden bg-[#1f2937] rounded-xl border border-gray-700/50 overflow-hidden">
+                <div id="detail-bar" class="h-1.5 bg-amber-400 transition-colors duration-300"></div>
+                <div class="p-6">
+                    <div class="grid grid-cols-3 gap-6">
+                        <!-- Col 1: Identity -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span id="d-icon" class="text-4xl"></span>
+                                <div>
+                                    <h3 id="d-name" class="text-base font-bold text-gray-100"></h3>
+                                    <p id="d-role" class="text-xs font-semibold text-gray-500 uppercase tracking-wide mt-0.5"></p>
+                                </div>
+                            </div>
+                            <p id="d-desc" class="text-xs text-gray-400 leading-relaxed mb-4"></p>
+                            <div class="space-y-2.5">
+                                <div>
+                                    <p class="text-xs text-gray-600 uppercase tracking-wider font-semibold mb-0.5">Replaces</p>
+                                    <p id="d-replaces" class="text-xs text-gray-300"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600 uppercase tracking-wider font-semibold mb-0.5">Command</p>
+                                    <code id="d-cmd" class="text-xs bg-[#0d1117] px-2 py-1 rounded text-amber-400 block w-fit"></code>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Col 2: Tools + I/O -->
+                        <div>
+                            <div class="mb-4">
+                                <p class="text-xs text-gray-600 uppercase tracking-wider font-semibold mb-2">Tools Available</p>
+                                <div id="d-tools" class="flex flex-wrap gap-1"></div>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-xs text-gray-600 uppercase tracking-wider font-semibold mb-2">Takes In</p>
+                                <ul id="d-inputs" class="space-y-1 text-xs text-gray-400"></ul>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-600 uppercase tracking-wider font-semibold mb-2">Produces</p>
+                                <ul id="d-outputs" class="space-y-1 text-xs text-gray-400"></ul>
+                            </div>
+                        </div>
+                        <!-- Col 3: Sample output -->
+                        <div>
+                            <p class="text-xs text-gray-600 uppercase tracking-wider font-semibold mb-2">Sample Output</p>
+                            <div class="bg-[#0d1117] rounded-lg p-4 border border-gray-800">
+                                <pre id="d-sample" class="text-xs text-gray-300 leading-relaxed font-mono whitespace-pre-wrap"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end tab-content-workflow -->
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-800 mt-12 px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between text-xs text-gray-600">
+            <span>AIopsExpert.com — Internal Operations Dashboard · v1.0</span>
+            <span>Built with Claude Agent SDK · GHL v2 API · Python 3.11</span>
+        </div>
+    </footer>
+
+    <script>
+        // ── Date ──────────────────────────────────────────
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        // ── Tab switching ─────────────────────────────────
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            ['ops', 'product', 'clients', 'workflow'].forEach(t => {
+                const btn = document.getElementById('tab-' + t);
+                if (!btn) return;
+                btn.className = t === tab
+                    ? 'px-6 py-4 text-sm font-semibold text-amber-400 border-b-[3px] border-amber-400 transition-all'
+                    : 'px-6 py-4 text-sm font-semibold text-gray-400 border-b-[3px] border-transparent hover:text-gray-200 transition-all';
+            });
+            document.getElementById('tab-content-' + tab).classList.add('active');
+        }
+
+        // ── Agent data ────────────────────────────────────
+        const AGENTS = {
+            intake: {
+                name: 'Intake Agent', icon: '🔍', role: 'Client Discovery & Proposal',
+                replaces: 'Account Manager / Business Analyst', command: '/intake-agent', color: '#f59e0b',
+                desc: 'Qualifies leads, runs an AI readiness assessment, scopes the engagement, and drafts the proposal. First agent to touch any new client — no build happens without a completed intake.',
+                tools: ['Read','Write','WebSearch'],
+                inputs: ['Client name & business description','Problem statement','Budget range'],
+                outputs: ['AI Readiness Assessment','Engagement Scope Document','Draft Proposal'],
+                sample: 'Assessment complete.\nHouston Capital Lending: 7/10 readiness.\nRecommended: GHL CRM setup + 1 workflow.\nProposed value: $1,500.\nConfidence: High.'
+            },
+            architect: {
+                name: 'Architect Agent', icon: '🏗️', role: 'PRD & Tech Stack Design',
+                replaces: 'Solutions Architect', command: '/architect-agent', color: '#f59e0b',
+                desc: 'Produces the PRD, selects the right tech stack, defines MVP scope, and writes an implementation plan the Builder can execute without ambiguity.',
+                tools: ['Read','Write','WebSearch'],
+                inputs: ['Engagement Scope Document','Client requirements','Budget constraints'],
+                outputs: ['Product Requirements Document (PRD)','Tech stack selection with rationale','Implementation plan with phases'],
+                sample: 'PRD v1 complete.\nStack: GHL v2 API + Python Claude Agent SDK.\nMVP: 3 pipelines, 8 custom fields,\ntest contact + opportunity.\nPhase 1 ETA: 48 hours.'
+            },
+            builder: {
+                name: 'Builder Agent', icon: '💻', role: 'Code & App Development',
+                replaces: 'Full-Stack Developer', command: '/builder-agent', color: '#f59e0b',
+                desc: 'Builds web apps, dashboards, Claude API integrations, and all code. Runs in parallel with Automator and Integrator after Architect completes.',
+                tools: ['Read','Write','Edit','Bash','WebSearch','WebFetch'],
+                inputs: ['Implementation plan','Tech stack specs','Feature requirements'],
+                outputs: ['Application code & scripts','HTML dashboards','Python agent CLI'],
+                sample: 'agent.py built — 9 tools, idempotent.\nCustom fields: 8/8 created ✓\nTest contact: created ✓\nTest opportunity: created ✓\nSetup report: saved ✓'
+            },
+            automator: {
+                name: 'Automator Agent', icon: '⚡', role: 'Make.com, n8n & Zapier',
+                replaces: 'Automation Specialist', command: '/automator-agent', color: '#f59e0b',
+                desc: 'Designs and builds automation workflows. Selects Make.com, n8n, or Zapier based on client stack and process complexity.',
+                tools: ['Read','Write','WebSearch'],
+                inputs: ['Business process maps','Tech stack','Integration requirements'],
+                outputs: ['Make.com scenario blueprints','Zapier workflow configs','n8n flow JSON'],
+                sample: 'Scenario: Website form\n→ HubSpot contact created\n→ Auto-response email sent\n→ Slack notification to owner\n\nEst. 3 hrs to build in Make.com.'
+            },
+            integrator: {
+                name: 'Integrator Agent', icon: '🔗', role: 'APIs, CRMs & Webhooks',
+                replaces: 'Integration Engineer', command: '/integrator-agent', color: '#f59e0b',
+                desc: 'Connects all external services — CRMs, APIs, ERPs, and data pipelines. Specializes in HubSpot, Salesforce, and GHL.',
+                tools: ['Read','Write','WebSearch','WebFetch'],
+                inputs: ['API credentials','Integration specs','Data mapping requirements'],
+                outputs: ['API connection configs','Webhook handlers','Data pipeline schemas'],
+                sample: 'GHL v2 API: connected ✓\nLocation ID: verified ✓\nCustom fields endpoint: confirmed ✓\nPipeline write scope: unavailable\n→ Audit-only mode enabled.\nLimitation documented in report.'
+            },
+            reviewer: {
+                name: 'Reviewer Agent', icon: '🔎', role: 'QA & Launch Gate',
+                replaces: 'QA Engineer / Delivery Manager', command: '/reviewer-agent', color: '#f59e0b',
+                desc: 'Final gate before delivery. Runs code audits, launch checklists, security checks. Nothing ships without Reviewer sign-off.',
+                tools: ['Read','Glob','Grep','Bash'],
+                inputs: ['All built code','Test results','Client requirements checklist'],
+                outputs: ['QA audit report','Launch checklist','Delivery approval or block'],
+                sample: 'Audit complete.\n0 critical issues.\n2 warnings:\n  ⚠️  Logging: partial\n  ⚠️  Nootens creds: pending\n\nHouston Phase 1:\nDELIVERY CLEARED ✅'
+            },
+            documenter: {
+                name: 'Documenter Agent', icon: '📄', role: 'SOPs & Client Handoff',
+                replaces: 'Technical Writer', command: '/documenter-agent', color: '#f59e0b',
+                desc: 'Produces SOPs, training guides, maintenance runbooks, and client handoff packages. Written for the least technical staff member — no jargon.',
+                tools: ['Read','Write'],
+                inputs: ['Built system specs','QA audit report','Client business context'],
+                outputs: ['Client SOP library','Step-by-step training guide','Maintenance runbook','Client System Launch Package'],
+                sample: 'Launch Package ready:\n• 12-page SOP\n• 3-page quick-start guide\n• Maintenance runbook\n\nReadability: 8th grade ✓\nDelivery-ready. 📦'
+            },
+            ghl: {
+                name: 'GHL Setup Agent', icon: '🤖', role: 'GHL CRM Deployment',
+                replaces: 'CRM Implementation Specialist', command: 'python agent.py --client <name>', color: '#3b82f6',
+                desc: 'Standalone Python CLI agent that configures a GoHighLevel CRM account from a per-client JSON config. Idempotent — safe to re-run anytime.',
+                tools: ['GHL v2 API','httpx','Claude SDK','dotenv'],
+                inputs: ['clients/<name>.json config','GHL API token (.env)','GHL Location ID (.env)'],
+                outputs: ['Custom fields created in GHL','Test contact & opportunity','Setup report with missing pipeline specs'],
+                sample: 'Run: --client houston\nFields: 8 created, 0 skipped ✓\nContact: created ✓\nOpportunity: created ✓\nPipelines missing: 3\n  → Fix & Flip (manual)\n  → DSCR (manual)\n  → Bridge Loan (manual)\nReport: saved ✓'
+            }
+        };
+
+        // ── Simulation steps ──────────────────────────────
+        const SIM_STEPS = [
+            { ms: 0,     msg: 'Starting engagement — Houston Capital Lending...', dot: 'amber' },
+            { ms: 400,   msg: 'Phase 1 · Intake Agent: qualifying lead, running AI readiness assessment...', dot: 'amber', activate: ['intake'] },
+            { ms: 2800,  msg: 'Phase 1 · Architect Agent: drafting PRD and selecting tech stack...', dot: 'amber', complete: ['intake'], activate: ['architect'], conn: 'conn-1' },
+            { ms: 5200,  msg: 'Phase 2 · Builder, Automator, Integrator running in parallel...', dot: 'amber', complete: ['architect'], activate: ['builder','automator','integrator'], parallelOn: true },
+            { ms: 8800,  msg: 'Phase 3 · Reviewer Agent: running QA audit and launch checklist...', dot: 'amber', complete: ['builder','automator','integrator'], activate: ['reviewer'], parallelOff: true },
+            { ms: 11000, msg: 'Phase 3 · Documenter Agent: generating SOPs and client handoff package...', dot: 'amber', complete: ['reviewer'], activate: ['documenter'], conn: 'conn-2' },
+            { ms: 13200, msg: '✅  Client engagement complete — Houston Capital Lending delivered!', dot: 'green', complete: ['documenter'], conn: 'conn-3', delivered: true }
+        ];
+
+        let simTimers = [], simRunning = false;
+
+        function setNode(id, state) {
+            const el = document.getElementById('node-' + id);
+            if (!el) return;
+            const badge = el.querySelector('.wf-badge');
+            el.classList.remove('wf-pulsing');
+            if (state === 'active') {
+                el.style.borderColor = '#f59e0b';
+                el.style.backgroundColor = 'rgba(245,158,11,0.08)';
+                el.style.boxShadow = '0 0 20px rgba(245,158,11,0.2)';
+                el.classList.add('wf-pulsing');
+                if (badge) { badge.style.background='rgba(245,158,11,0.15)'; badge.style.color='#f59e0b'; badge.textContent='RUNNING...'; }
+            } else if (state === 'done') {
+                el.style.borderColor = 'rgba(34,197,94,0.45)';
+                el.style.backgroundColor = 'rgba(34,197,94,0.05)';
+                el.style.boxShadow = 'none';
+                if (badge) { badge.style.background='rgba(34,197,94,0.12)'; badge.style.color='#4ade80'; badge.textContent='DONE ✓'; }
+            } else {
+                el.style.borderColor = '';
+                el.style.backgroundColor = '';
+                el.style.boxShadow = '';
+                if (badge) { badge.style.background=''; badge.style.color=''; badge.textContent='READY'; }
+            }
+        }
+
+        function setConn(id, on) {
+            const el = document.getElementById(id);
+            if (el) el.style.backgroundColor = on ? '#f59e0b' : '';
+        }
+
+        function runSim() {
+            if (simRunning) return;
+            resetSim();
+            simRunning = true;
+            const btn = document.getElementById('run-btn');
+            btn.textContent = '⏳ Running...';
+            btn.disabled = true;
+            btn.style.opacity = '0.65';
+
+            SIM_STEPS.forEach(step => {
+                simTimers.push(setTimeout(() => {
+                    document.getElementById('sim-msg').textContent = step.msg;
+                    const dot = document.getElementById('sim-dot');
+                    dot.style.backgroundColor = step.dot === 'green' ? '#4ade80' : '#f59e0b';
+
+                    if (step.activate) step.activate.forEach(id => setNode(id, 'active'));
+                    if (step.complete) step.complete.forEach(id => setNode(id, 'done'));
+                    if (step.conn) setConn(step.conn, true);
+
+                    const pf = document.getElementById('parallel-frame');
+                    if (step.parallelOn && pf) {
+                        pf.style.borderColor = '#f59e0b';
+                        pf.style.boxShadow = '0 0 18px rgba(245,158,11,0.12)';
+                    }
+                    if (step.parallelOff && pf) {
+                        pf.style.borderColor = 'rgba(34,197,94,0.35)';
+                        pf.style.boxShadow = 'none';
+                    }
+                    if (step.delivered) {
+                        const nd = document.getElementById('node-delivered');
+                        if (nd) {
+                            nd.style.opacity = '1';
+                            nd.style.borderColor = '#4ade80';
+                            nd.style.backgroundColor = 'rgba(34,197,94,0.1)';
+                            nd.style.boxShadow = '0 0 24px rgba(34,197,94,0.25)';
+                            nd.querySelector('.text-gray-600').textContent = 'DONE ✓';
+                        }
+                        btn.textContent = '✅ Complete';
+                        simRunning = false;
+                    }
+                }, step.ms));
+            });
+        }
+
+        function resetSim() {
+            simTimers.forEach(t => clearTimeout(t));
+            simTimers = [];
+            simRunning = false;
+            const btn = document.getElementById('run-btn');
+            if (btn) { btn.textContent = '▶ Run Engagement'; btn.disabled = false; btn.style.opacity = '1'; }
+            document.getElementById('sim-dot').style.backgroundColor = '';
+            document.getElementById('sim-msg').textContent = 'Ready — click Run Engagement to simulate a full client delivery';
+            ['intake','architect','builder','automator','integrator','reviewer','documenter'].forEach(id => setNode(id, 'idle'));
+            ['conn-1','conn-2','conn-3'].forEach(id => setConn(id, false));
+            const pf = document.getElementById('parallel-frame');
+            if (pf) { pf.style.borderColor = ''; pf.style.boxShadow = ''; }
+            const nd = document.getElementById('node-delivered');
+            if (nd) {
+                nd.style.opacity = '0.4';
+                nd.style.borderColor = '';
+                nd.style.backgroundColor = '';
+                nd.style.boxShadow = '';
+                nd.querySelector('.text-gray-600').textContent = 'PENDING';
+            }
+        }
+
+        function selectAgent(id) {
+            const a = AGENTS[id];
+            if (!a) return;
+            const panel = document.getElementById('detail-panel');
+            panel.classList.remove('hidden');
+            document.getElementById('detail-bar').style.backgroundColor = a.color;
+            document.getElementById('d-icon').textContent = a.icon;
+            document.getElementById('d-name').textContent = a.name;
+            document.getElementById('d-role').textContent = a.role;
+            document.getElementById('d-desc').textContent = a.desc;
+            document.getElementById('d-replaces').textContent = a.replaces;
+            document.getElementById('d-cmd').textContent = a.command;
+            document.getElementById('d-sample').textContent = a.sample;
+            document.getElementById('d-tools').innerHTML =
+                a.tools.map(t => `<span class="text-xs bg-[#0d1117] border border-gray-700 px-2 py-0.5 rounded text-gray-300">${t}</span>`).join('');
+            document.getElementById('d-inputs').innerHTML =
+                a.inputs.map(i => `<li class="flex items-start gap-1.5"><span class="text-gray-600 mt-0.5 flex-shrink-0">→</span>${i}</li>`).join('');
+            document.getElementById('d-outputs').innerHTML =
+                a.outputs.map(o => `<li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5 flex-shrink-0">✓</span>${o}</li>`).join('');
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+
+</body>
+</html>
