@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d//**)",
+      "PowerShell(dir \"d:\\\\Claude-Code\\\\Development\\\\Real Estate AI Coach\\\\\")",
+      "PowerShell(dir \"d:\\\\Claude-Code\\\\Development\\\\Real Estate\\\\src\\\\app\\\\\")",
+      "PowerShell(dir \"d:\\\\Claude-Code\\\\Development\\\\Real Estate\\\\src\\\\components\\\\\")",
+      "PowerShell(dir \"D:\\\\Claude-Code\\\\Development\\\\Nootens Presentation\\\\\" -Recurse)"
+    ]
+  }
+}
